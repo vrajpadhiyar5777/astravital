@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071426">
+  <title>ASTRAVITAL | Astronaut Health Intelligence</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="loginScreen" class="login-screen">
+    <div class="login-art">
+      <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+      <div class="planet"></div><div class="login-copy">
+        <div class="brand"><span class="brand-mark">✦</span> ASTRAVITAL</div>
+        <p class="eyebrow">ASTRONAUT HEALTH INTELLIGENCE</p>
+        <h1>Health insights<br><em>beyond Earth.</em></h1>
+        <p class="muted">A unified mission-health workspace for monitoring vital signs, identifying changes and supporting informed decisions.</p>
+        <div class="login-foot">MISSION CONTROL SYSTEM <span>•</span> DEMO ENVIRONMENT</div>
+      </div>
+    </div>
+    <div class="login-panel">
+      <div class="mobile-brand brand"><span class="brand-mark">✦</span> ASTRAVITAL</div>
+      <div class="login-card">
+        <div class="status-line"><span class="pulse"></span> SECURE CREW ACCESS</div>
+        <h2>Welcome back</h2><p class="muted">Sign in to access your mission dashboard.</p>
+        <form id="loginForm">
+          <label for="email">Crew email</label><input id="email" type="email" value="commander@astravital.demo" required>
+          <label for="password">Password</label><input id="password" type="password" value="Orbit2026!" required>
+          <div class="form-row"><label class="remember"><input type="checkbox" checked> Remember this device</label><span class="tiny">DEMO ACCESS</span></div>
+          <button class="primary-btn full" type="submit">Enter mission dashboard <span>→</span></button>
+          <p id="loginError" class="error"></p>
+        </form>
+        <div class="demo-box"><strong>Demo credentials</strong><br>commander@astravital.demo<br>Orbit2026!</div>
+        <p class="legal">Demonstration prototype. Do not use for real medical decisions.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden">
+    <aside class="sidebar">
+      <a class="brand side-brand" href="#"><span class="brand-mark">✦</span> ASTRAVITAL</a>
+      <div class="mission-label">MISSION WORKSPACE</div>
+      <nav>
+        <button class="nav-item active" data-view="overview"><span>▦</span> Overview</button>
+        <button class="nav-item" data-view="health"><span>♡</span> Health metrics</button>
+        <button class="nav-item" data-view="alerts"><span>⚑</span> Alerts <b id="alertCount" class="nav-count">0</b></button>
+        <button class="nav-item" data-view="assistant"><span>✧</span> AI health copilot</button>
+        <button class="nav-item" data-view="checkin"><span>＋</span> Daily check-in</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="crew-mini"><div class="avatar">VC</div><div><strong>V. Commander</strong><small>Expedition crew</small></div><span class="online-dot"></span></div>
+        <button id="logoutBtn" class="logout">↪ Sign out</button>
+        <div class="side-disclaimer">ASTRAVITAL DEMO v1.0<br>For demonstration only</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><div class="breadcrumb">MISSION / <span id="pageCrumb">OVERVIEW</span></div><h2 id="pageTitle">Mission overview</h2></div>
+        <div class="top-actions"><div class="mission-chip"><span class="pulse"></span> DEMO TELEMETRY</div><button id="notifyBtn" class="icon-btn" title="Enable browser notifications">♧<i id="notifyDot"></i></button><div class="avatar">VC</div></div>
+      </header>
+
+      <section id="view-overview" class="view">
+        <div class="welcome-row"><div><p class="eyebrow">EXPEDITION 07 · ORBITAL RESEARCH</p><h1>Good day, Commander <span class="wave">✦</span></h1><p class="muted">Here is your crew health snapshot. Review changes and follow up on any alerts.</p></div><div class="date-pill" id="currentDate"></div></div>
+        <div class="status-banner" id="overallBanner"><div class="status-icon">✓</div><div><strong id="overallTitle">Health overview is stable</strong><p id="overallText">Continue routine monitoring and daily check-ins.</p></div><span class="banner-tag" id="overallTag">MONITORING</span></div>
+        <div class="section-head"><div><h3>Vital signs</h3><p class="muted">Latest demonstration readings</p></div><button class="text-btn" data-goto="health">View all metrics →</button></div>
+        <div class="metric-grid">
+          <article class="metric-card"><div class="metric-top"><span>Heart rate</span><span class="metric-icon pink">♡</span></div><div class="metric-value"><strong id="heartVal">72</strong><small>bpm</small></div><div class="metric-foot"><span id="heartState" class="state good">● In expected range</span><span>♥</span></div><div class="spark"><i style="height:35%"></i><i style="height:52%"></i><i style="height:42%"></i><i style="height:67%"></i><i style="height:55%"></i><i style="height:80%"></i><i style="height:60%"></i><i style="height:72%"></i></div></article>
+          <article class="metric-card"><div class="metric-top"><span>Blood oxygen</span><span class="metric-icon blue">◉</span></div><div class="metric-value"><strong id="spo2Val">98</strong><small>% SpO₂</small></div><div class="metric-foot"><span id="spo2State" class="state good">● In expected range</span><span>◉</span></div><div class="spark"><i style="height:70%"></i><i style="height:66%"></i><i style="height:75%"></i><i style="height:60%"></i><i style="height:82%"></i><i style="height:76%"></i><i style="height:86%"></i><i style="height:80%"></i></div></article>
+          <article class="metric-card"><div class="metric-top"><span>Sleep duration</span><span class="metric-icon violet">☾</span></div><div class="metric-value"><strong id="sleepVal">7.5</strong><small>hours</small></div><div class="metric-foot"><span id="sleepState" class="state good">● Routine on track</span><span>◒</span></div><div class="spark"><i style="height:48%"></i><i style="height:65%"></i><i style="height:54%"></i><i style="height:72%"></i><i style="height:64%"></i><i style="height:84%"></i><i style="height:75%"></i><i style="height:90%"></i></div></article>
+          <article class="metric-card"><div class="metric-top"><span>Radiation exposure</span><span class="metric-icon amber">☼</span></div><div class="metric-value"><strong id="radiationVal">0.42</strong><small>mSv / day</small></div><div class="metric-foot"><span id="radiationState" class="state good">● Within demo threshold</span><span>☼</span></div><div class="spark"><i style="height:25%"></i><i style="height:38%"></i><i style="height:33%"></i><i style="height:48%"></i><i style="height:42%"></i><i style="height:60%"></i><i style="height:54%"></i><i style="height:66%"></i></div></article>
+        </div>
+        <div class="two-col">
+          <article class="panel"><div class="panel-head"><div><h3>Health trend</h3><p class="muted">Illustrative wellness score over 7 days</p></div><span class="chart-legend"><i></i> Wellness index</span></div><div class="chart-wrap"><canvas id="trendChart" height="190"></canvas></div></article>
+          <article class="panel risk-panel"><div class="panel-head"><div><h3>Health domains</h3><p class="muted">Current monitoring overview</p></div><span class="tiny">DEMO</span></div><div id="domainList" class="domain-list"></div></article>
+        </div>
+        <div class="section-head"><div><h3>Recent mission activity</h3><p class="muted">Latest updates from your health workspace</p></div><button class="text-btn" data-goto="alerts">Open alert centre →</button></div>
+        <div class="panel activity-list" id="activityList"></div>
+      </section>
+
+      <section id="view-health" class="view hidden">
+        <div class="section-head"><div><h3>Health metrics</h3><p class="muted">Review the latest readings and their status.</p></div><button class="primary-btn small" data-goto="checkin">＋ Add check-in</button></div>
+        <div class="metric-grid health-metrics">
+          <article class="metric-card"><div class="metric-top"><span>Heart rate</span><span class="metric-icon pink">♡</span></div><div class="metric-value"><strong id="hHeart">72</strong><small>bpm</small></div><p class="muted">Resting heart-rate reading</p></article>
+          <article class="metric-card"><div class="metric-top"><span>Blood oxygen</span><span class="metric-icon blue">◉</span></div><div class="metric-value"><strong id="hSpo2">98</strong><small>% SpO₂</small></div><p class="muted">Peripheral oxygen saturation</p></article>
+          <article class="metric-card"><div class="metric-top"><span>Blood pressure</span><span class="metric-icon violet">⌁</span></div><div class="metric-value"><strong id="hBp">118/76</strong><small>mmHg</small></div><p class="muted">Systolic / diastolic</p></article>
+          <article class="metric-card"><div class="metric-top"><span>Sleep</span><span class="metric-icon violet">☾</span></div><div class="metric-value"><strong id="hSleep">7.5</strong><small>hours</small></div><p class="muted">Reported sleep duration</p></article>
+          <article class="metric-card"><div class="metric-top"><span>Radiation</span><span class="metric-icon amber">☼</span></div><div class="metric-value"><strong id="hRadiation">0.42</strong><small>mSv/day</small></div><p class="muted">Illustrative daily exposure</p></article>
+          <article class="metric-card"><div class="metric-top"><span>Activity</span><span class="metric-icon green">⌁</span></div><div class="metric-value"><strong id="hActivity">45</strong><small>min</small></div><p class="muted">Reported activity duration</p></article>
+        </div>
+        <div class="panel note-panel"><strong>About these readings</strong><p>All displayed values are simulated for the hackathon demonstration. Thresholds are illustrative and are not medical reference ranges. Real mission use requires validated sensors, astronaut-specific baselines and flight medical protocols.</p></div>
+      </section>
+
+      <section id="view-alerts" class="view hidden">
+        <div class="section-head"><div><h3>Alert centre</h3><p class="muted">Review changes flagged by the demonstration monitoring rules.</p></div><button id="clearAlerts" class="secondary-btn small">Mark all reviewed</button></div>
+        <div class="alert-summary"><div><span class="summary-number" id="criticalCount">0</span><small>Priority alerts</small></div><div><span class="summary-number" id="watchCount">0</span><small>Monitor notices</small></div><div><span class="summary-number" id="reviewCount">0</span><small>Reviewed</small></div></div>
+        <div id="alertsList" class="alerts-list"></div>
+      </section>
+
+      <section id="view-assistant" class="view hidden">
+        <div class="assistant-intro"><div class="assistant-orb">✧</div><div><p class="eyebrow">ASTRAVITAL INTELLIGENCE</p><h3>AI Health Copilot</h3><p class="muted">Understand your readings and explore sensible next steps.</p></div><span class="demo-label">RULE-BASED DEMO</span></div>
+        <div class="assistant-layout"><div class="panel chat-panel"><div class="chat-header"><div class="avatar ai-avatar">✧</div><div><strong>Mission Health Assistant</strong><small><span class="online-dot"></span> Available in demo mode</small></div></div><div id="chatMessages" class="chat-messages"><div class="message bot"><span class="msg-label">ASTRAVITAL ASSISTANT</span>Hello, Commander. I can explain the readings in this demo dashboard and suggest when to contact the mission medical team. What would you like to understand?</div></div><div class="suggestions"><button class="suggestion">Summarize my health status</button><button class="suggestion">Explain my latest alerts</button><button class="suggestion">What should I monitor?</button></div><form id="chatForm" class="chat-input"><input id="chatInput" placeholder="Ask about your health readings..." autocomplete="off"><button class="send-btn" type="submit">↑</button></form><p class="chat-disclaimer">Demo decision support only · Not a medical diagnosis or emergency service.</p></div><div class="panel copilot-side"><h4>Current context</h4><div id="copilotContext"></div><div class="note-panel compact"><strong>Safety first</strong><p>If you feel unwell or experience concerning symptoms, follow mission medical procedures and contact the qualified medical team. Do not rely on this demo assistant.</p></div></div></div>
+      </section>
+
+      <section id="view-checkin" class="view hidden">
+        <div class="section-head"><div><h3>Daily health check-in</h3><p class="muted">Enter simulated readings to see how the dashboard responds.</p></div><span class="demo-label">SIMULATED INPUT</span></div>
+        <form id="checkinForm" class="panel checkin-form">
+          <div class="form-grid">
+            <div><label for="inHeart">Heart rate <small>(bpm)</small></label><input id="inHeart" type="number" min="30" max="220" value="72" required></div>
+            <div><label for="inSpo2">Blood oxygen <small>(%)</small></label><input id="inSpo2" type="number" min="50" max="100" value="98" required></div>
+            <div><label for="inSystolic">Systolic pressure <small>(mmHg)</small></label><input id="inSystolic" type="number" min="60" max="250" value="118" required></div>
+            <div><label for="inDiastolic">Diastolic pressure <small>(mmHg)</small></label><input id="inDiastolic" type="number" min="30" max="150" value="76" required></div>
+            <div><label for="inSleep">Sleep duration <small>(hours)</small></label><input id="inSleep" type="number" min="0" max="24" step=".1" value="7.5" required></div>
+            <div><label for="inRadiation">Radiation exposure <small>(mSv/day)</small></label><input id="inRadiation" type="number" min="0" max="100" step=".01" value=".42" required></div>
+            <div><label for="inActivity">Activity <small>(minutes)</small></label><input id="inActivity" type="number" min="0" max="600" value="45" required></div>
+            <div><label for="inMood">Mood / stress check</label><select id="inMood"><option value="good">Good / manageable</option><option value="moderate">Some stress</option><option value="high">High stress / low mood</option></select></div>
+          </div>
+          <label for="inNotes">Optional notes</label><textarea id="inNotes" rows="3" placeholder="Add a note for your own demo record..."></textarea>
+          <div class="form-actions"><span class="muted tiny">Submitting updates this browser's demo dashboard.</span><button class="primary-btn" type="submit">Save check-in & analyse →</button></div>
+          <p id="checkinResult" class="success-msg"></p>
+        </form>
+      </section>
+      <footer>ASTRAVITAL · DEMONSTRATION SOFTWARE · NOT FOR CLINICAL USE <span>MISSION CONTROL INTERFACE</span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
